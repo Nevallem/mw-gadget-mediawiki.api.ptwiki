@@ -1,0 +1,1 @@
+# mw-gadget-mediawiki.api.ptwiki
