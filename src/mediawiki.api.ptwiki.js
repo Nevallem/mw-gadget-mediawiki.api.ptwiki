@@ -1,7 +1,7 @@
 /** Extended API
  *
  * @date 08/oct/2012
- * @update 08/mai/2021
+ * @update 09/mai/2021
  * @since MW 1.19
  */
 /*jshint laxbreak: true */
@@ -34,15 +34,13 @@ $.extend( mw.Api.prototype, {
 			.done( function ( data ) {
 				apiDeferred.resolve( data.edit );
 
-				if ( !info.done ) {
+				if ( !info.done )
 					return;
-				}
 
-				if ( $.isFunction( info.done ) ) {
+				if ( typeof info.done === 'function' )
 					info.done( data.edit );
-				} else if ( $.isFunction( info.done.success ) ) {
+				else if ( typeof info.done.success === 'function' )
 					info.done.success( data.edit );
-				}
 			} )
 			.fail( function ( code, result ) {
 				if ( !info.done ) {
@@ -50,11 +48,10 @@ $.extend( mw.Api.prototype, {
 					return;
 				}
 
-				if ( !result && $.isFunction( info.done.unknownError ) ) {
+				if ( !result && ( typeof info.done.unknownError === 'function' ) )
 					info.done.unknownError();
-				} else if ( result.error && $.isFunction( info.done.apiError ) ) {
+				else if ( result.error && ( typeof info.done.apiError === 'function' ) )
 					info.done.apiError( result.error );
-				}
 			} );
 
 		return apiDeferred.promise();
